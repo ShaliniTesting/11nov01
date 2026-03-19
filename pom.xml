@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Birth Year Calculator - Maven Project Descriptor
+
+    This POM defines the build configuration for a Java console application
+    that calculates a user's birth year based on the age they enter.
+
+    Build commands:
+        mvn compile                  Compile sources
+        mvn test                     Run JUnit 5 tests
+        mvn package                  Package as executable JAR
+        java -jar target/birth-year-calculator-1.0-SNAPSHOT.jar   Run application
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Project Coordinates -->
+    <groupId>com.birthyearcalculator</groupId>
+    <artifactId>birth-year-calculator</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <!-- Project Metadata -->
+    <name>Birth Year Calculator</name>
+    <description>A Java console application that calculates a user's birth year based on their current age, using the modern java.time API with input validation and exception handling.</description>
+
+    <!-- Build and Dependency Properties -->
+    <properties>
+        <!-- Java 21 LTS: uses the 'release' flag for cross-compilation safety -->
+        <maven.compiler.release>21</maven.compiler.release>
+        <!-- Source file encoding -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- JUnit 5 version: single property for DRY version management across BOM and dependencies -->
+        <junit.version>5.14.2</junit.version>
+    </properties>
+
+    <!--
+        Dependency Management: JUnit BOM
+        Importing the JUnit BOM ensures all JUnit 5 component versions are consistent.
+        Individual JUnit dependencies below inherit their version from this BOM,
+        so they do not declare explicit version tags.
+    -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>${junit.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- Project Dependencies -->
+    <dependencies>
+        <!-- JUnit Jupiter API: annotations and assertions for writing tests -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- JUnit Jupiter Engine: test discovery and execution engine -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!--
+                Maven Compiler Plugin: compiles Java source files.
+                Configured with release=21 to target Java 21 LTS,
+                which enables the release flag for API and bytecode validation.
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.15.0</version>
+                <configuration>
+                    <release>21</release>
+                </configuration>
+            </plugin>
+
+            <!--
+                Maven Surefire Plugin: executes unit tests during the 'test' phase.
+                Supports JUnit 5 Jupiter test discovery and execution out of the box.
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.5</version>
+            </plugin>
+
+            <!--
+                Maven JAR Plugin: packages compiled classes into an executable JAR.
+                The Main-Class manifest entry enables direct execution via 'java -jar'.
+                The main class resides in the default package (no package prefix).
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.4.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
