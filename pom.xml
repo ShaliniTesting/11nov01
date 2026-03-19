@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-    Birth Year Calculator - Maven Project Descriptor
+    Age Calculator - Maven Project Descriptor
 
     This POM defines the build configuration for a Java console application
-    that calculates a user's birth year based on the age they enter.
+    that calculates a user's exact age based on their date of birth.
 
     Build commands:
         mvn compile                  Compile sources
         mvn test                     Run JUnit 5 tests
         mvn package                  Package as executable JAR
-        java -jar target/birth-year-calculator-1.0-SNAPSHOT.jar   Run application
+        java -jar target/age-calculator-1.0-SNAPSHOT.jar   Run application
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -17,14 +17,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!-- Project Coordinates -->
-    <groupId>com.birthyearcalculator</groupId>
-    <artifactId>birth-year-calculator</artifactId>
+    <groupId>com.agecalculator</groupId>
+    <artifactId>age-calculator</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <!-- Project Metadata -->
-    <name>Birth Year Calculator</name>
-    <description>A Java console application that calculates a user's birth year based on their current age, using the modern java.time API with input validation and exception handling.</description>
+    <name>Age Calculator</name>
+    <description>A Java console application that calculates a user's exact age in years, months, and days based on their date of birth, using the modern java.time API with input validation and exception handling.</description>
 
     <!-- Build and Dependency Properties -->
     <properties>
